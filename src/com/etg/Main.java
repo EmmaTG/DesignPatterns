@@ -5,7 +5,6 @@ import com.etg.Factory.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class Main {
 
@@ -20,15 +19,15 @@ public class Main {
         client_code.add_item("projector");
         // Add another projector
         client_code.add_item("projector");
+        // Add another projector
+        client_code.add_item("projector");
 
         System.out.println(client_code.print_inventory());
 
-        IItem item = client_code.checkOutItem("computer");
+        IItem item = client_code.checkOutItem("projector");
         System.out.println(item.toString());
         System.out.println(item.get_returned_time().toString());
         System.out.println(client_code.print_inventory());
-
-
     }
 }
 
@@ -46,17 +45,20 @@ class Factory_Client_Code {
     }
 
     IItem checkOutItem(String type){
+        IItem checked_out_item = null;
         ArrayList<IItem>  items = this.inventory.get(type);
         for (IItem item : items){
             if (!item.is_checked_out()){
                 item.setCheckedOut(true);
-                return item;
+                checked_out_item = item;
+                configure_factory(type);
+                this.item_factory.update_item(checked_out_item);
             }
         }
-        return null;
+        return checked_out_item;
     }
 
-    void configure_item(String type) {
+    void configure_factory(String type) {
         switch (type) {
             case ("computer"):
                 item_factory = new Computer_Item();
@@ -66,21 +68,27 @@ class Factory_Client_Code {
                 break;
             default:
                 System.out.println(type + " not supported in inventory");
+                item_factory= null;
         }
     }
 
     void add_item(String type) {
-        this.configure_item(type);
-        IItem new_item = item_factory.create_item();
-        String item_type = this.item_factory.getItem_type();
-        ArrayList<IItem> items;
-        if (this.inventory.containsKey(item_type)){
-            items = this.inventory.get(item_type);
-        } else {
-            items = new ArrayList<>();
+        this.configure_factory(type);
+        if (item_factory!=null) {
+            IItem new_item = item_factory.create_item();
+            String item_type = this.item_factory.getItem_type();
+            ArrayList<IItem> items;
+            if (this.inventory.containsKey(item_type)) {
+                items = this.inventory.get(item_type);
+            } else {
+                items = new ArrayList<>();
+            }
+            items.add(new_item);
+            this.inventory.put(item_type, items);
         }
-        items.add(new_item);
-        this.inventory.put(item_type,items);
+        else {
+            System.out.println("Could not create item " + type);
+        }
     }
 
     String print_inventory(){
@@ -95,12 +103,12 @@ class Factory_Client_Code {
             for (IItem item : entry.getValue()) {
                 if (!item.is_checked_out()){
                     num_available += 1;
+                    double item_weight = item.getWeight();
+                    weight += item_weight;
                 }
-                double item_weight = item.getWeight();
-                weight += item_weight;
             }
                 s += "\t number available: " + num_available + ",\n";
-               s += "\t total_weight: " + weight + ",\n";
+               s += "\t total_stored_weight: " + weight + ",\n";
             }
         return s;
     }
