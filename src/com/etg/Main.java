@@ -1,5 +1,6 @@
 package com.etg;
 
+import com.etg.Builder.*;
 import com.etg.Factory.*;
 
 import java.util.ArrayList;
@@ -10,33 +11,74 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // Builder Code //
+        BuilderClientCode builderClientCode = new BuilderClientCode();
+        Pizza pizza1  = builderClientCode.createHawianPizza(SizeType.SMALL,"GLUTENFREE");
+        Pizza pizza2  = builderClientCode.createHawianPizza(SizeType.SMALL);
+        Pizza pizza3 = builderClientCode.createDiavoloPizza(SizeType.LARGE);
+
+        ArrayList<Pizza> orderedPizzas = new ArrayList<>();
+        orderedPizzas.add(pizza1);
+        orderedPizzas.add(pizza2);
+        orderedPizzas.add(pizza3);
+        for (Pizza pizza : orderedPizzas){
+            System.out.println(pizza.toString());
+        }
+
 
         // Factory code //
-        Factory_Client_Code client_code = new Factory_Client_Code();
-        // Add a computer
-        client_code.add_item("computer");
-        // Add a projector
-        client_code.add_item("projector");
-        // Add another projector
-        client_code.add_item("projector");
-        // Add another projector
-        client_code.add_item("projector");
-
-        System.out.println(client_code.print_inventory());
-
-        IItem item = client_code.checkOutItem("projector");
-        System.out.println(item.toString());
-        System.out.println(item.get_returned_time().toString());
-        System.out.println(client_code.print_inventory());
+//        factoryClientCode client_code = new factoryClientCode();
+//        // Add a computer
+//        client_code.add_item("computer");
+//        // Add a projector
+//        client_code.add_item("projector");
+//        // Add another projector
+//        client_code.add_item("projector");
+//        // Add another projector
+//        client_code.add_item("projector");
+//
+//        System.out.println(client_code.print_inventory());
+//
+//        IItem item = client_code.checkOutItem("projector");
+//        System.out.println(item.toString());
+//        System.out.println(item.get_returned_time().toString());
+//        System.out.println(client_code.print_inventory());
     }
 }
 
-class Factory_Client_Code {
+class BuilderClientCode {
+
+    PizzaDirector director = new PizzaDirector();
+    PizzaBuilder builder = new PizzaBuilder();
+
+    public Pizza createHawianPizza(SizeType size, String base){
+        this.builder.setSize(size);
+        this.builder.makeBase(base);
+        director.makeHawian(this.builder);
+        return this.builder.getPizza();
+    }
+    public Pizza createHawianPizza(SizeType size){;
+        return createHawianPizza(size, "NORMAL");
+    }
+
+
+    public Pizza createDiavoloPizza(SizeType size, String base){
+        this.builder.setSize(size);
+        builder.makeBase(base);
+        director.makeDiavolo(this.builder);
+        return this.builder.getPizza();
+    }
+    public Pizza createDiavoloPizza(SizeType size){;
+        return createDiavoloPizza(size, "NORMAL");
+    }
+}
+
+class factoryClientCode {
 
     HashMap<String, ArrayList<IItem>> inventory;
     IItem_Factory item_factory = null;
 
-    public Factory_Client_Code() {
+    public factoryClientCode() {
         this.inventory = new HashMap<>();
     }
 
