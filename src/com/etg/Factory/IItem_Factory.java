@@ -1,5 +1,6 @@
 package com.etg.Factory;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 //Factory: Base creator
@@ -10,6 +11,7 @@ public abstract class IItem_Factory {
     public IItem create_item(){
         // Business logic e.g.:
             // Add item to database
+            // Use info from item to add to/ alter item before sendign it out
         return this.add_item();
     }
 

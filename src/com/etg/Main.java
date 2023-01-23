@@ -5,6 +5,7 @@ import com.etg.Factory.*;
 import com.etg.Prototype.Button;
 import com.etg.Prototype.HTMLElement;
 import com.etg.Prototype.Table;
+import com.etg.Singleton.Singleton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,33 +15,46 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // Prototype Code//
-        ArrayList<HTMLElement> elements = new ArrayList<>();
-        Button confirmButton = new Button();
-        confirmButton.setColour("red");
-        confirmButton.setHeight(2);
-        confirmButton.setWidth(6);
-        confirmButton.setSentence("Confirm choice on click");
-        elements.add(confirmButton);
 
-        Button confirmButton2 = (Button) confirmButton.clone();
-        elements.add(confirmButton2);
 
-        Table table1 = new Table();
-        table1.setColour("pink");
-        table1.setHeight(4);
-        table1.setWidth(8);
-        table1.setNumRows(2);
-        table1.setNumColumns(4);
-        table1.setDataSource("https://I.doNotKn.ow");
-        elements.add(table1);
+        // CREATIONAL DESIGN PATTERNS //
 
-        Table table2 = (Table) table1.clone();
-        elements.add(table2);
+//        // Singleton Code
+//        // Must: 1. Only have oen instance AND 2. Be globally accessible
+//        // Uses: logging, caching, db accessing
+//        Singleton singleton = Singleton.getInstance("Foo");
+//        Singleton singleton2 = Singleton.getInstance("Bar");
+//        System.out.println(singleton.value);
+//        System.out.println(singleton2.value);
 
-        for (HTMLElement element: elements){
-            System.out.println(element.toString());
-        }
+
+//        // Prototype Code//
+//        ArrayList<HTMLElement> elements = new ArrayList<>();
+//        Button confirmButton = new Button();
+//        confirmButton.setColour("red");
+//        confirmButton.setHeight(2);
+//        confirmButton.setWidth(6);
+//        confirmButton.setSentence("Confirm choice on click");
+//        elements.add(confirmButton);
+//
+//        Button confirmButton2 = (Button) confirmButton.clone();
+//        elements.add(confirmButton2);
+//
+//        Table table1 = new Table();
+//        table1.setColour("pink");
+//        table1.setHeight(4);
+//        table1.setWidth(8);
+//        table1.setNumRows(2);
+//        table1.setNumColumns(4);
+//        table1.setDataSource("https://I.doNotKn.ow");
+//        elements.add(table1);
+//
+//        Table table2 = (Table) table1.clone();
+//        elements.add(table2);
+//
+//        for (HTMLElement element: elements){
+//            System.out.println(element.toString());
+//        }
 
 //        // Builder Code //
 //        PizzaDirector director = new PizzaDirector();
