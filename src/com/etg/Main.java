@@ -2,6 +2,9 @@ package com.etg;
 
 import com.etg.Builder.*;
 import com.etg.Factory.*;
+import com.etg.Prototype.Button;
+import com.etg.Prototype.HTMLElement;
+import com.etg.Prototype.Table;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +14,33 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // Prototype Code//
+        ArrayList<HTMLElement> elements = new ArrayList<>();
+        Button confirmButton = new Button();
+        confirmButton.setColour("red");
+        confirmButton.setHeight(2);
+        confirmButton.setWidth(6);
+        confirmButton.setSentence("Confirm choice on click");
+        elements.add(confirmButton);
 
+        Button confirmButton2 = (Button) confirmButton.clone();
+        elements.add(confirmButton2);
+
+        Table table1 = new Table();
+        table1.setColour("pink");
+        table1.setHeight(4);
+        table1.setWidth(8);
+        table1.setNumRows(2);
+        table1.setNumColumns(4);
+        table1.setDataSource("https://I.doNotKn.ow");
+        elements.add(table1);
+
+        Table table2 = (Table) table1.clone();
+        elements.add(table2);
+
+        for (HTMLElement element: elements){
+            System.out.println(element.toString());
+        }
 
 //        // Builder Code //
 //        PizzaDirector director = new PizzaDirector();
