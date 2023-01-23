@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class PizzaBuilder implements IBuilder {
 
     private double cost;
+    private double baseCost;
     private SizeType size;
     private String base = "NORMAL";
     private String sauce;
@@ -13,12 +14,18 @@ public class PizzaBuilder implements IBuilder {
 
     public Pizza getPizza(){
         this.setCost(this.size);
-        return new Pizza(this.base, this.sauce, this.cost, this.size, this.toppings);
+        Pizza newPizza = new Pizza(this.base, this.sauce, this.cost, this.size, this.toppings);
+        this.reset();
+        return newPizza;
     }
 
     @Override
     public void reset() {
-
+        this.cost = 0;
+        this.size = null;
+        this.base = "NORMAL";
+        this.sauce = "";
+        this.toppings = new ArrayList<>();
     }
 
     @Override
@@ -41,18 +48,26 @@ public class PizzaBuilder implements IBuilder {
         this.toppings.add(top1);
     }
 
+    @Override
+    public void setBaseCost(double cost) {
+        this.baseCost = cost;
+    }
+
     public void setCost(SizeType size) {
         if (size==SizeType.SMALL){
-            this.cost = 34.50;
+            this.cost = this.baseCost;
         }
         else if (size==SizeType.MEDIUM){
-            this.cost = 42.50;
+            this.cost = this.baseCost + 5.0;
         }
         else if (size==SizeType.LARGE){
-            this.cost = 50.00;
+            this.cost = this.baseCost + 7.5;
         }
         else {
             System.out.println("No size of this type available");
+        }
+        if (base.equals("GLUTENFREE")){
+            this.cost += 4.5;
         }
     }
 }

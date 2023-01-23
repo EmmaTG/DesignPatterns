@@ -59,9 +59,22 @@ public class Pizza {
 
     @Override
     public String toString() {
-        return  "base='" + base + '\'' +
+        String s = "base='" + base + '\'' +
                 ", sauce='" + sauce + '\'' +
                 ", cost=" + cost +
-                ", size=" + size;
+                ", size=" + size +
+                ", toppings = {";
+
+        for (String top : toppings){
+            s += top;
+            if (top == toppings.get(toppings.size()-1)){
+                s += "}";
+            }
+            else {
+                s += ", ";
+            }
+        }
+
+        return s;
     }
 }

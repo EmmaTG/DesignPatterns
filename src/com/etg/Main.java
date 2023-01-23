@@ -11,19 +11,32 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // Builder Code //
-        BuilderClientCode builderClientCode = new BuilderClientCode();
-        Pizza pizza1  = builderClientCode.createHawianPizza(SizeType.SMALL,"GLUTENFREE");
-        Pizza pizza2  = builderClientCode.createHawianPizza(SizeType.SMALL);
-        Pizza pizza3 = builderClientCode.createDiavoloPizza(SizeType.LARGE);
 
-        ArrayList<Pizza> orderedPizzas = new ArrayList<>();
-        orderedPizzas.add(pizza1);
-        orderedPizzas.add(pizza2);
-        orderedPizzas.add(pizza3);
-        for (Pizza pizza : orderedPizzas){
-            System.out.println(pizza.toString());
-        }
+
+//        // Builder Code //
+//        PizzaDirector director = new PizzaDirector();
+//        PizzaBuilder builder = new PizzaBuilder();
+//
+//        director.makeHawian(builder);
+//        director.makeGlutenFree(builder);
+//        director.makeSmall(builder);
+//        Pizza pizza1 = builder.getPizza();
+//
+//        director.makeHawian(builder);
+//        director.makeSmall(builder);
+//        Pizza pizza2 = builder.getPizza();
+//
+//        director.makeDiavolo(builder);
+//        director.makeLarge(builder);
+//        Pizza pizza3 = builder.getPizza();
+//
+//        ArrayList<Pizza> orderedPizzas = new ArrayList<>();
+//        orderedPizzas.add(pizza1);
+//        orderedPizzas.add(pizza2);
+//        orderedPizzas.add(pizza3);
+//        for (Pizza pizza : orderedPizzas){
+//            System.out.println(pizza.toString());
+//        }
 
 
         // Factory code //
@@ -43,33 +56,6 @@ public class Main {
 //        System.out.println(item.toString());
 //        System.out.println(item.get_returned_time().toString());
 //        System.out.println(client_code.print_inventory());
-    }
-}
-
-class BuilderClientCode {
-
-    PizzaDirector director = new PizzaDirector();
-    PizzaBuilder builder = new PizzaBuilder();
-
-    public Pizza createHawianPizza(SizeType size, String base){
-        this.builder.setSize(size);
-        this.builder.makeBase(base);
-        director.makeHawian(this.builder);
-        return this.builder.getPizza();
-    }
-    public Pizza createHawianPizza(SizeType size){;
-        return createHawianPizza(size, "NORMAL");
-    }
-
-
-    public Pizza createDiavoloPizza(SizeType size, String base){
-        this.builder.setSize(size);
-        builder.makeBase(base);
-        director.makeDiavolo(this.builder);
-        return this.builder.getPizza();
-    }
-    public Pizza createDiavoloPizza(SizeType size){;
-        return createDiavoloPizza(size, "NORMAL");
     }
 }
 

@@ -6,5 +6,6 @@ public interface IBuilder {
     public void makeBase(String base);
     public void addSauce(String sauce);
     public void addTopping(String top);
+    public void setBaseCost(double cost);
 
 }
