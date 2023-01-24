@@ -1,5 +1,6 @@
 package com.etg;
 
+import com.etg.Adapter.WeatherForecast;
 import com.etg.Builder.*;
 import com.etg.Factory.*;
 import com.etg.Prototype.Button;
@@ -15,90 +16,110 @@ public class Main {
 
     public static void main(String[] args) {
 
-
+        // STRUCTURAL PATTERNS //
+        adapter_pattern();
 
         // CREATIONAL DESIGN PATTERNS //
+//        factory_pattern();
+//        builder_pattern();
+//        prototype_pattern();
+//        singleton_pattern();
+    }
 
-//        // Singleton Code
-//        // Must: 1. Only have oen instance AND 2. Be globally accessible
-//        // Uses: logging, caching, db accessing
-//        Singleton singleton = Singleton.getInstance("Foo");
-//        Singleton singleton2 = Singleton.getInstance("Bar");
-//        System.out.println(singleton.value);
-//        System.out.println(singleton2.value);
+    public static void adapter_pattern(){
+        // 'Adapts' imperial units to metric
+        WeatherForecast forecast = new WeatherForecast();
+        System.out.println("IMPERIAL WEATHER FORECAST");
+        System.out.println(forecast.whatsTheWeather("IMPERIAL"));
+        System.out.println("METRIC WEATHER FORECAST");
+        System.out.println(forecast.whatsTheWeather("METRIC"));
+    }
 
+    public static void singleton_pattern(){
+        //        // Singleton Code
+        // Must: 1. Only have oen instance AND 2. Be globally accessible
+        // Uses: logging, caching, db accessing
+        Singleton singleton = Singleton.getInstance("Foo");
+        Singleton singleton2 = Singleton.getInstance("Bar");
+        System.out.println(singleton.value);
+        System.out.println(singleton2.value);
+    }
 
-//        // Prototype Code//
-//        ArrayList<HTMLElement> elements = new ArrayList<>();
-//        Button confirmButton = new Button();
-//        confirmButton.setColour("red");
-//        confirmButton.setHeight(2);
-//        confirmButton.setWidth(6);
-//        confirmButton.setSentence("Confirm choice on click");
-//        elements.add(confirmButton);
-//
-//        Button confirmButton2 = (Button) confirmButton.clone();
-//        elements.add(confirmButton2);
-//
-//        Table table1 = new Table();
-//        table1.setColour("pink");
-//        table1.setHeight(4);
-//        table1.setWidth(8);
-//        table1.setNumRows(2);
-//        table1.setNumColumns(4);
-//        table1.setDataSource("https://I.doNotKn.ow");
-//        elements.add(table1);
-//
-//        Table table2 = (Table) table1.clone();
-//        elements.add(table2);
-//
-//        for (HTMLElement element: elements){
-//            System.out.println(element.toString());
-//        }
+    public static void prototype_pattern(){
+        //        // Prototype Code//
+        ArrayList<HTMLElement> elements = new ArrayList<>();
+        Button confirmButton = new Button();
+        confirmButton.setColour("red");
+        confirmButton.setHeight(2);
+        confirmButton.setWidth(6);
+        confirmButton.setSentence("Confirm choice on click");
+        elements.add(confirmButton);
 
-//        // Builder Code //
-//        PizzaDirector director = new PizzaDirector();
-//        PizzaBuilder builder = new PizzaBuilder();
-//
-//        director.makeHawian(builder);
-//        director.makeGlutenFree(builder);
-//        director.makeSmall(builder);
-//        Pizza pizza1 = builder.getPizza();
-//
-//        director.makeHawian(builder);
-//        director.makeSmall(builder);
-//        Pizza pizza2 = builder.getPizza();
-//
-//        director.makeDiavolo(builder);
-//        director.makeLarge(builder);
-//        Pizza pizza3 = builder.getPizza();
-//
-//        ArrayList<Pizza> orderedPizzas = new ArrayList<>();
-//        orderedPizzas.add(pizza1);
-//        orderedPizzas.add(pizza2);
-//        orderedPizzas.add(pizza3);
-//        for (Pizza pizza : orderedPizzas){
-//            System.out.println(pizza.toString());
-//        }
+        Button confirmButton2 = (Button) confirmButton.clone();
+        elements.add(confirmButton2);
 
+        Table table1 = new Table();
+        table1.setColour("pink");
+        table1.setHeight(4);
+        table1.setWidth(8);
+        table1.setNumRows(2);
+        table1.setNumColumns(4);
+        table1.setDataSource("https://I.doNotKn.ow");
+        elements.add(table1);
 
+        Table table2 = (Table) table1.clone();
+        elements.add(table2);
+
+        for (HTMLElement element: elements){
+            System.out.println(element.toString());
+        }
+    }
+
+    public static void builder_pattern(){
+        //        // Builder Code //
+        PizzaDirector director = new PizzaDirector();
+        PizzaBuilder builder = new PizzaBuilder();
+
+        director.makeHawian(builder);
+        director.makeGlutenFree(builder);
+        director.makeSmall(builder);
+        Pizza pizza1 = builder.getPizza();
+
+        director.makeHawian(builder);
+        director.makeSmall(builder);
+        Pizza pizza2 = builder.getPizza();
+
+        director.makeDiavolo(builder);
+        director.makeLarge(builder);
+        Pizza pizza3 = builder.getPizza();
+
+        ArrayList<Pizza> orderedPizzas = new ArrayList<>();
+        orderedPizzas.add(pizza1);
+        orderedPizzas.add(pizza2);
+        orderedPizzas.add(pizza3);
+        for (Pizza pizza : orderedPizzas){
+            System.out.println(pizza.toString());
+        }
+    }
+
+    public static void factory_pattern(){
         // Factory code //
-//        factoryClientCode client_code = new factoryClientCode();
-//        // Add a computer
-//        client_code.add_item("computer");
-//        // Add a projector
-//        client_code.add_item("projector");
-//        // Add another projector
-//        client_code.add_item("projector");
-//        // Add another projector
-//        client_code.add_item("projector");
-//
-//        System.out.println(client_code.print_inventory());
-//
-//        IItem item = client_code.checkOutItem("projector");
-//        System.out.println(item.toString());
-//        System.out.println(item.get_returned_time().toString());
-//        System.out.println(client_code.print_inventory());
+        factoryClientCode client_code = new factoryClientCode();
+        // Add a computer
+        client_code.add_item("computer");
+        // Add a projector
+        client_code.add_item("projector");
+        // Add another projector
+        client_code.add_item("projector");
+        // Add another projector
+        client_code.add_item("projector");
+
+        System.out.println(client_code.print_inventory());
+
+        IItem item = client_code.checkOutItem("projector");
+        System.out.println(item.toString());
+        System.out.println(item.get_returned_time().toString());
+        System.out.println(client_code.print_inventory());
     }
 }
 
