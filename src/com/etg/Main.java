@@ -3,6 +3,7 @@ package com.etg;
 import com.etg.Adapter.WeatherForecast;
 import com.etg.Bridge.*;
 import com.etg.Builder.*;
+import com.etg.Composite.*;
 import com.etg.Factory.*;
 import com.etg.Prototype.Button;
 import com.etg.Prototype.HTMLElement;
@@ -19,13 +20,36 @@ public class Main {
 
         // STRUCTURAL PATTERNS //
 //        adapter_pattern();
-        bridge_pattern();
+//        bridge_pattern();
+        composite_pattern();
 
         // CREATIONAL DESIGN PATTERNS //
 //        factory_pattern();
 //        builder_pattern();
 //        prototype_pattern();
 //        singleton_pattern();
+    }
+
+    public static void composite_pattern() {
+        ArrayList<IDivision> divisions = new ArrayList<>();
+        ArrayList<IDivision> buildingSubdivisions = new ArrayList<>();
+
+        divisions.add(new Acquisition());
+
+        buildingSubdivisions.add(new Assembly());
+        buildingSubdivisions.add(new Manufacturing());
+        Building building = new Building(buildingSubdivisions);
+
+        Production production = new Production();
+        production.addDivision(building);
+        production.addDivision(new Packaging());
+        divisions.add(production);
+
+        divisions.add(new Delivery());
+
+        for (IDivision div : divisions){
+            div.workToBeDone();
+        }
     }
 
     public static void bridge_pattern() {
