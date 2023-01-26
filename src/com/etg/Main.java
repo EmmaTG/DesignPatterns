@@ -1,6 +1,7 @@
 package com.etg;
 
 import com.etg.Adapter.WeatherForecast;
+import com.etg.Bridge.*;
 import com.etg.Builder.*;
 import com.etg.Factory.*;
 import com.etg.Prototype.Button;
@@ -17,7 +18,8 @@ public class Main {
     public static void main(String[] args) {
 
         // STRUCTURAL PATTERNS //
-        adapter_pattern();
+//        adapter_pattern();
+        bridge_pattern();
 
         // CREATIONAL DESIGN PATTERNS //
 //        factory_pattern();
@@ -26,7 +28,32 @@ public class Main {
 //        singleton_pattern();
     }
 
+    public static void bridge_pattern() {
+        //  split a large class or a set of closely related classes into two separate hierarchies—abstraction and implementation
+        //  Allows two things to vary independently, although they depend on each other
+        // Example: A workshop [abstraction] (that can vary and be advanced) that works on different vehicles [implementors]
+
+        Vehicle brokenCar = new Car();
+        fixVehicle(brokenCar);
+        Vehicle brokenBike = new Bike();
+        fixVehicle(brokenBike);
+    }
+
+    public static void fixVehicle(Vehicle vehicle){
+        Workshop workshop = new Workshop(vehicle);
+        System.out.println(workshop.work());
+        System.out.println("Cost of work: " + workshop.getCost());
+        System.out.println();
+
+        AdvancedWorkshop advancedWorkshop = new AdvancedWorkshop(vehicle);
+        advancedWorkshop.workQuickly();
+        System.out.println(advancedWorkshop.work());
+        System.out.println("Cost of work: " + advancedWorkshop.getCost());
+        System.out.println();
+    }
+
     public static void adapter_pattern(){
+        // Allows objects with incompatible interfaces to collaborate.
         // 'Adapts' imperial units to metric
         WeatherForecast forecast = new WeatherForecast();
         System.out.println("IMPERIAL WEATHER FORECAST");
