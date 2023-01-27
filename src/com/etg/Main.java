@@ -28,7 +28,7 @@ public class Main {
 //        bridge_pattern();
 //        composite_pattern();
 //        decorator_pattern();
-//        fascade_pattern();
+//        facade_pattern();
         fly_weight_pattern();
 
         // CREATIONAL DESIGN PATTERNS //
@@ -42,7 +42,7 @@ public class Main {
 
     }
 
-    public static void fascade_pattern() {
+    public static void facade_pattern() {
         //provides a simplified interface to complex stuff.
         // Only gives access to features client really cares about or give client access to a tiny bit of functionality within a complex library
         OrderPizza order = new OrderPizza("Basic", "22 Main avenue");
