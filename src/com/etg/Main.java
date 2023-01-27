@@ -9,6 +9,7 @@ import com.etg.Decorator.CalzoneDecorator;
 import com.etg.Decorator.IPizzaProduction;
 import com.etg.Decorator.PizzaMaking;
 import com.etg.Factory.*;
+import com.etg.Fascade.OrderPizza;
 import com.etg.Prototype.Button;
 import com.etg.Prototype.HTMLElement;
 import com.etg.Prototype.Table;
@@ -26,13 +27,26 @@ public class Main {
 //        adapter_pattern();
 //        bridge_pattern();
 //        composite_pattern();
-        decorator_pattern();
+//        decorator_pattern();
+//        fascade_pattern();
+        fly_weight_pattern();
 
         // CREATIONAL DESIGN PATTERNS //
 //        factory_pattern();
 //        builder_pattern();
 //        prototype_pattern();
 //        singleton_pattern();
+    }
+
+    public static void fly_weight_pattern() {
+
+    }
+
+    public static void fascade_pattern() {
+        //provides a simplified interface to complex stuff.
+        // Only gives access to features client really cares about or give client access to a tiny bit of functionality within a complex library
+        OrderPizza order = new OrderPizza("Basic", "22 Main avenue");
+        order.placeOrder();
     }
 
     public static void decorator_pattern() {
@@ -54,9 +68,6 @@ public class Main {
         pizzaProduction.assemble();
         pizzaProduction.cook();
         System.out.println();
-
-
-
     }
 
     public static void composite_pattern() {
