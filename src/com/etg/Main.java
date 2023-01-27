@@ -22,6 +22,7 @@ public class Main {
 //        adapter_pattern();
 //        bridge_pattern();
         composite_pattern();
+//        decorator_pattern();
 
         // CREATIONAL DESIGN PATTERNS //
 //        factory_pattern();
@@ -30,19 +31,24 @@ public class Main {
 //        singleton_pattern();
     }
 
+    public static void decorator_pattern() {
+
+    }
+
     public static void composite_pattern() {
+        // The pizza deliveryy process from orderign to delivering
         ArrayList<IDivision> divisions = new ArrayList<>();
         ArrayList<IDivision> buildingSubdivisions = new ArrayList<>();
 
-        divisions.add(new Acquisition());
+        divisions.add(new FrontOfHouse());
 
-        buildingSubdivisions.add(new Assembly());
-        buildingSubdivisions.add(new Manufacturing());
-        Building building = new Building(buildingSubdivisions);
+        buildingSubdivisions.add(new GatherIngredients());
+        buildingSubdivisions.add(new Preparation());
+        Assembly building = new Assembly(buildingSubdivisions);
 
-        Production production = new Production();
+        PizzaProduction production = new PizzaProduction();
         production.addDivision(building);
-        production.addDivision(new Packaging());
+        production.addDivision(new Cooking());
         divisions.add(production);
 
         divisions.add(new Delivery());

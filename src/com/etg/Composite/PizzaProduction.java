@@ -3,13 +3,13 @@ package com.etg.Composite;
 import java.util.ArrayList;
 
 // Composite: element with sub-elements
-public class Production implements IDivision{
+public class PizzaProduction implements IDivision{
 
     ArrayList<IDivision> divisions = new ArrayList<>();
 
     @Override
     public String workToBeDone() {
-        System.out.println("Production has started:");
+        System.out.println("THe pizza cooking process has begun:");
         for (IDivision div : divisions){
             div.workToBeDone();
         }

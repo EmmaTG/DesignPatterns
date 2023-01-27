@@ -1,10 +1,10 @@
 package com.etg.Composite;
 
-public class Acquisition  implements IDivision{
+public class Cooking implements IDivision{
 
     @Override
     public String workToBeDone() {
-        System.out.println("Items to be acquired");
+        System.out.println("Pizza is beign cooked");
         return null;
     }
 }
