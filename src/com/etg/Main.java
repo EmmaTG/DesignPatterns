@@ -4,6 +4,10 @@ import com.etg.Adapter.WeatherForecast;
 import com.etg.Bridge.*;
 import com.etg.Builder.*;
 import com.etg.Composite.*;
+import com.etg.Decorator.BurntDecorator;
+import com.etg.Decorator.CalzoneDecorator;
+import com.etg.Decorator.IPizzaProduction;
+import com.etg.Decorator.PizzaMaking;
 import com.etg.Factory.*;
 import com.etg.Prototype.Button;
 import com.etg.Prototype.HTMLElement;
@@ -21,8 +25,8 @@ public class Main {
         // STRUCTURAL PATTERNS //
 //        adapter_pattern();
 //        bridge_pattern();
-        composite_pattern();
-//        decorator_pattern();
+//        composite_pattern();
+        decorator_pattern();
 
         // CREATIONAL DESIGN PATTERNS //
 //        factory_pattern();
@@ -32,11 +36,31 @@ public class Main {
     }
 
     public static void decorator_pattern() {
+        // Attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors
+        // Allows change/addition of behaviours AT runtime (unlike inheritance would)
+        // Using aggregation (A contains B, B and live without A)
+
+        IPizzaProduction pizzaProduction = new PizzaMaking();
+        pizzaProduction.assemble();
+        pizzaProduction.cook();
+        System.out.println();
+
+        pizzaProduction = new CalzoneDecorator(pizzaProduction);
+        pizzaProduction.assemble();
+        pizzaProduction.cook();
+        System.out.println();
+
+        pizzaProduction = new BurntDecorator(pizzaProduction);
+        pizzaProduction.assemble();
+        pizzaProduction.cook();
+        System.out.println();
+
+
 
     }
 
     public static void composite_pattern() {
-        // The pizza deliveryy process from orderign to delivering
+        // The pizza delivery process from ordering to delivering
         ArrayList<IDivision> divisions = new ArrayList<>();
         ArrayList<IDivision> buildingSubdivisions = new ArrayList<>();
 
