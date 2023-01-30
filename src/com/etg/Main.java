@@ -10,6 +10,7 @@ import com.etg.Decorator.IPizzaProduction;
 import com.etg.Decorator.PizzaMaking;
 import com.etg.Factory.*;
 import com.etg.Fascade.OrderPizza;
+import com.etg.Flyweight.SelfMadePizza;
 import com.etg.Prototype.Button;
 import com.etg.Prototype.HTMLElement;
 import com.etg.Prototype.Table;
@@ -29,7 +30,8 @@ public class Main {
 //        composite_pattern();
 //        decorator_pattern();
 //        facade_pattern();
-        fly_weight_pattern();
+//        fly_weight_pattern();
+        proxy_pattern();
 
         // CREATIONAL DESIGN PATTERNS //
 //        factory_pattern();
@@ -38,9 +40,33 @@ public class Main {
 //        singleton_pattern();
     }
 
-    public static void fly_weight_pattern() {
+    public static void proxy_pattern() {
 
     }
+
+    public static void fly_weight_pattern() {
+        // Lets you fit more objects into the available RAM
+        // Split data into intrinsic (lives in the object, cannot be changed) and extrinsic (altered by outside objects)
+        // Flyweight should be immutable, can use factory to manage flyweigth objects
+        int PIZZASIZE=20;
+        SelfMadePizza pizza = new SelfMadePizza();
+        for (int i =0; i<200; i++){
+            pizza.addCheese(random(0, PIZZASIZE),random(0, PIZZASIZE));
+        }
+        for (int i =0; i<100; i++){
+            pizza.addHam(random(0, PIZZASIZE),random(0, PIZZASIZE));
+        }
+        for (int i =0; i<5; i++){
+            pizza.addTruffle(random(0, PIZZASIZE),random(0, PIZZASIZE));
+        }
+
+        System.out.println("Cost of pizza: " + (short) pizza.costOfPizza());
+
+    }
+    private static double random(double min, double max) {
+        return min + ((Math.random() * ((max - min) + 1)));
+    }
+
 
     public static void facade_pattern() {
         //provides a simplified interface to complex stuff.
