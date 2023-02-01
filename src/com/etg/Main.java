@@ -3,7 +3,9 @@ package com.etg;
 import com.etg.Adapter.WeatherForecast;
 import com.etg.Bridge.*;
 import com.etg.Builder.*;
+import com.etg.CoR.*;
 import com.etg.Composite.*;
+import com.etg.Composite.FrontOfHouse;
 import com.etg.Decorator.BurntDecorator;
 import com.etg.Decorator.CalzoneDecorator;
 import com.etg.Decorator.IPizzaProduction;
@@ -29,7 +31,7 @@ public class Main {
     public static void main(String[] args) {
 
         // BEHAVIORAL PATTERNS //
-//        chain_of_responsibility_pattern();
+        chain_of_responsibility_pattern();
 
         // STRUCTURAL PATTERNS //
 //        adapter_pattern();
@@ -49,7 +51,28 @@ public class Main {
     public static void chain_of_responsibility_pattern() {
         // pass requests along a chain of handlers. each handler decides to process or pass on
         // Canonical -> move along handlers until we find the right one
-        // Sequential -> execute every handler until there's a problem on one
+        // Sequential -> execute every handler until there's a problem on one (e.g authentication->authorization,->validation)
+
+        // Canonical
+        com.etg.CoR.FrontOfHouse foH = new com.etg.CoR.FrontOfHouse();
+        Kitchen kitchen = new Kitchen();
+        DeliveryPartner uber = new DeliveryPartner();
+        Nondescript manager = new Nondescript();
+        foH.addNextHandler(kitchen);
+        kitchen.addNextHandler(uber);
+        uber.addNextHandler(manager);
+
+        Complaint complaint1 = new Complaint(CATEGORY.CUSTOMER_SERVICE, "Person taking my order was very rude");
+        Complaint complaint2 = new Complaint(CATEGORY.COOKING, "Pizza was gross");
+        Complaint complaint3 = new Complaint(CATEGORY.OTHER, "Restaurant was TOO loud!");
+        Complaint complaint4 = new Complaint(CATEGORY.PACKAGING, "Packaging was weak");
+        Complaint complaint5 = new Complaint(CATEGORY.DELIVERY, "Pizza was cold");
+        foH.logComplaint(complaint1);
+        foH.logComplaint(complaint2);
+        foH.logComplaint(complaint3);
+        foH.logComplaint(complaint4);
+        foH.logComplaint(complaint5);
+        System.out.println("Total number of complaints: " + foH.getNumberOfComplaints());
 
     }
 
