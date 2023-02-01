@@ -14,6 +14,10 @@ import com.etg.Flyweight.SelfMadePizza;
 import com.etg.Prototype.Button;
 import com.etg.Prototype.HTMLElement;
 import com.etg.Prototype.Table;
+import com.etg.Proxy.Recipe;
+import com.etg.Proxy.RecipeCache;
+import com.etg.Proxy.RecipeManager;
+import com.etg.Proxy.RecipeStore;
 import com.etg.Singleton.Singleton;
 
 import java.util.ArrayList;
@@ -24,6 +28,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // BEHAVIORAL PATTERNS //
+//        chain_of_responsibility_pattern();
+
         // STRUCTURAL PATTERNS //
 //        adapter_pattern();
 //        bridge_pattern();
@@ -31,7 +38,7 @@ public class Main {
 //        decorator_pattern();
 //        facade_pattern();
 //        fly_weight_pattern();
-        proxy_pattern();
+//        proxy_pattern();
 
         // CREATIONAL DESIGN PATTERNS //
 //        factory_pattern();
@@ -39,9 +46,30 @@ public class Main {
 //        prototype_pattern();
 //        singleton_pattern();
     }
+    public static void chain_of_responsibility_pattern() {
+        // pass requests along a chain of handlers. each handler decides to process or pass on
+        // Canonical -> move along handlers until we find the right one
+        // Sequential -> execute every handler until there's a problem on one
+
+    }
 
     public static void proxy_pattern() {
-
+        // Lets you provide a substitute or placeholder for another object (while waiting for object to arrive)
+        // Proxy disguises itself as the real object (using service interface)
+        // Functions like a cache service
+        RecipeStore storeOfRecipes = new RecipeStore();
+        RecipeCache cachedRecipes = new RecipeCache(storeOfRecipes);
+        RecipeManager manager = new RecipeManager(cachedRecipes);
+        System.out.println(manager.findRecipe("Vegetarian").toString());
+        ArrayList<String> ingredients = manager.getRecipeIngredients("Vegetarian");
+        for (String i : ingredients){
+            System.out.println(i);
+        }
+        ArrayList<Recipe> recipes = manager.getAllRecipes();
+        for (Recipe r : recipes){
+            System.out.println(r.toString());
+        }
+        System.out.println(manager.findRecipe("Vegetarian").toString());
     }
 
     public static void fly_weight_pattern() {
