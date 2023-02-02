@@ -4,6 +4,7 @@ import com.etg.Adapter.WeatherForecast;
 import com.etg.Bridge.*;
 import com.etg.Builder.*;
 import com.etg.CoR.*;
+import com.etg.Command.*;
 import com.etg.Composite.*;
 import com.etg.Composite.FrontOfHouse;
 import com.etg.Decorator.BurntDecorator;
@@ -31,7 +32,9 @@ public class Main {
     public static void main(String[] args) {
 
         // BEHAVIORAL PATTERNS //
-        chain_of_responsibility_pattern();
+//        chain_of_responsibility_pattern();
+//        command_pattern();
+        iterator_pattern();
 
         // STRUCTURAL PATTERNS //
 //        adapter_pattern();
@@ -48,6 +51,29 @@ public class Main {
 //        prototype_pattern();
 //        singleton_pattern();
     }
+
+    public static void iterator_pattern(){
+        // lets you traverse elements of a collection without exposing its underlying representation (list, stack, tree, etc.).
+
+    }
+
+    public static void command_pattern(){
+        // Turns request into stand alone object containing all the information. Pass requests as method arguments
+        // Separation of concern, breaking things into layers
+        KitchenInvoker invoker = new KitchenInvoker(); // INVOKER (button or switch to be pressed ONLY when necessary/ready)
+        Calzone calzone = new Calzone("Plain"); // RECEIVER (the item upon which the commands are executed)
+        Command cookFood = new CookFood(calzone); // CONCRETE COMMAND 1 (the concrete command to be done to the receiver BUT only when the invoker is 'invoked')
+        Command packageFood = new PackageFood(calzone); // CONCRETE COMMAND 2
+
+        System.out.println(calzone.toString());
+        invoker.setCommand(cookFood);
+        invoker.completedTask();
+        System.out.println(calzone.toString());
+        invoker.setCommand(packageFood);
+        invoker.completedTask();
+        System.out.println(calzone.toString());
+    }
+
     public static void chain_of_responsibility_pattern() {
         // pass requests along a chain of handlers. each handler decides to process or pass on
         // Canonical -> move along handlers until we find the right one
