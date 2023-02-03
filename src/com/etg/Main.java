@@ -15,6 +15,9 @@ import com.etg.Factory.*;
 import com.etg.Fascade.OrderPizza;
 import com.etg.Flyweight.SelfMadePizza;
 import com.etg.Iterator.*;
+import com.etg.Mediator.CheckBox;
+import com.etg.Mediator.Dialog;
+import com.etg.Mediator.TextBox;
 import com.etg.Prototype.Button;
 import com.etg.Prototype.HTMLElement;
 import com.etg.Prototype.Table;
@@ -35,7 +38,8 @@ public class Main {
         // BEHAVIORAL PATTERNS //
 //        chain_of_responsibility_pattern();
 //        command_pattern();
-        iterator_pattern();
+//        iterator_pattern();
+        mediator_pattern();
 
         // STRUCTURAL PATTERNS //
 //        adapter_pattern();
@@ -52,11 +56,37 @@ public class Main {
 //        prototype_pattern();
 //        singleton_pattern();
     }
+    public static void mediator_pattern(){
+        // reduce chaotic dependencies between objects. The pattern restricts direct communications between
+        // the objects and forces them to collaborate only via a mediator object.
+        // Mediate redirects calls to the appropriate components (Objects doesn't do the work, it just sends a message to the mediator
+        // that it is now ready to have the work done/ notify mediator to notify other components)
+
+        Dialog dialogBox = new Dialog(); // Concrete mediator
+        TextBox firstname = new TextBox(dialogBox,"First name"); // Component
+        dialogBox.setFirstname(firstname); // Registration of component with mediator
+        TextBox lastname = new TextBox(dialogBox,"Last name");
+        dialogBox.setLastname(lastname);
+        TextBox pizzaName = new TextBox(dialogBox,"Type of Pizza?");
+        dialogBox.setPizzaName(pizzaName);
+        CheckBox glutenfree = new CheckBox(dialogBox, "Gluten free base?");
+        dialogBox.setGlutenfree(glutenfree);
+        CheckBox comfirmChoice = new CheckBox(dialogBox, "Are you sure!!");
+        dialogBox.setConfirm(comfirmChoice);
+        CheckBox extraTopping = new CheckBox(dialogBox,"Extra toppings?");
+        dialogBox.setExtraTopping(extraTopping);
+
+
+        firstname.processEvent("Emma"); // Action performed on component sent to mediator (dialog) to utilize. Component merely send message along
+        lastname.processEvent("Griffiths");
+        pizzaName.processEvent("Hawaian");
+        glutenfree.processEvent("y");
+    }
 
     public static void iterator_pattern(){
         // lets you traverse elements of a collection without exposing its underlying representation (list, stack, tree, etc.).
         // iterates through general list fo everyone to iterate only customers of only staff
-        PersonList listOfPeople = new PersonList();
+        PersonList listOfPeople = new PersonList(); // Collection
         listOfPeople.addPerson(new Person("Emma", "0123456789", PERSONCATGEORY.STAFF));
         listOfPeople.addPerson(new Person("Daniel", "0123456789", PERSONCATGEORY.STAFF));
         listOfPeople.addPerson(new Person("Robyn", "0123456789", PERSONCATGEORY.STAFF));
@@ -71,8 +101,8 @@ public class Main {
         listOfPeople.addPerson(new Person("Simon", "0123456789", PERSONCATGEORY.CUSTOMER));
 
         System.out.println("List fo Staff");
-        IPersonIterator staffIterator = listOfPeople.createStaffIterator();
-        while (staffIterator.hasMore()){
+        IPersonIterator staffIterator = listOfPeople.createStaffIterator(); // Selecting method to traverse (i.e. via staff)
+        while (staffIterator.hasMore()){ // Traverse list finding staff
             System.out.println(staffIterator.getNext());
         }
 
