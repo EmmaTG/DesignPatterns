@@ -14,6 +14,7 @@ import com.etg.Decorator.PizzaMaking;
 import com.etg.Factory.*;
 import com.etg.Fascade.OrderPizza;
 import com.etg.Flyweight.SelfMadePizza;
+import com.etg.Iterator.*;
 import com.etg.Prototype.Button;
 import com.etg.Prototype.HTMLElement;
 import com.etg.Prototype.Table;
@@ -54,7 +55,33 @@ public class Main {
 
     public static void iterator_pattern(){
         // lets you traverse elements of a collection without exposing its underlying representation (list, stack, tree, etc.).
+        // iterates through general list fo everyone to iterate only customers of only staff
+        PersonList listOfPeople = new PersonList();
+        listOfPeople.addPerson(new Person("Emma", "0123456789", PERSONCATGEORY.STAFF));
+        listOfPeople.addPerson(new Person("Daniel", "0123456789", PERSONCATGEORY.STAFF));
+        listOfPeople.addPerson(new Person("Robyn", "0123456789", PERSONCATGEORY.STAFF));
+        listOfPeople.addPerson(new Person("Rowan", "0123456789", PERSONCATGEORY.CUSTOMER));
+        listOfPeople.addPerson(new Person("Thomas", "0123456789", PERSONCATGEORY.CUSTOMER));
+        listOfPeople.addPerson(new Person("Karen", "0123456789", PERSONCATGEORY.STAFF));
+        listOfPeople.addPerson(new Person("Richard", "0123456789", PERSONCATGEORY.STAFF));
+        listOfPeople.addPerson(new Person("Louise", "0123456789", PERSONCATGEORY.CUSTOMER));
+        listOfPeople.addPerson(new Person("Justin", "0123456789", PERSONCATGEORY.CUSTOMER));
+        listOfPeople.addPerson(new Person("Eva", "0123456789", PERSONCATGEORY.CUSTOMER));
+        listOfPeople.addPerson(new Person("Alison", "0123456789", PERSONCATGEORY.STAFF));
+        listOfPeople.addPerson(new Person("Simon", "0123456789", PERSONCATGEORY.CUSTOMER));
 
+        System.out.println("List fo Staff");
+        IPersonIterator staffIterator = listOfPeople.createStaffIterator();
+        while (staffIterator.hasMore()){
+            System.out.println(staffIterator.getNext());
+        }
+
+
+        System.out.println("List fo Customers");
+        IPersonIterator customerIterator = listOfPeople.createCustomerIterator();
+        while (customerIterator.hasMore()){
+            System.out.println(customerIterator.getNext());
+        }
     }
 
     public static void command_pattern(){
