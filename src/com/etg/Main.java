@@ -18,6 +18,9 @@ import com.etg.Iterator.*;
 import com.etg.Mediator.CheckBox;
 import com.etg.Mediator.Dialog;
 import com.etg.Mediator.TextBox;
+import com.etg.Memento.Reservation;
+import com.etg.Memento.ReservationSystem;
+import com.etg.Memento.UndoCommand;
 import com.etg.Prototype.Button;
 import com.etg.Prototype.HTMLElement;
 import com.etg.Prototype.Table;
@@ -28,6 +31,7 @@ import com.etg.Proxy.RecipeStore;
 import com.etg.Singleton.Singleton;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +43,8 @@ public class Main {
 //        chain_of_responsibility_pattern();
 //        command_pattern();
 //        iterator_pattern();
-        mediator_pattern();
+//        mediator_pattern();
+        memento_pattern();
 
         // STRUCTURAL PATTERNS //
 //        adapter_pattern();
@@ -56,6 +61,36 @@ public class Main {
 //        prototype_pattern();
 //        singleton_pattern();
     }
+
+    public static void memento_pattern(){
+        // save and restore the previous state of an object without revealing the details of its implementation.
+        // Originator creates the snapshots, memento acts as snap shot, caretaker only knows when and why snapshot was created
+        // Often used with Command pattern to implement the Undo action
+        History history = new History();
+        UndoCommand commands = new UndoCommand(history);
+        ReservationSystem system = new ReservationSystem(history);
+        system.addReservation(new Reservation("Emma", new Date(), 4));
+        System.out.println("--------------------Added one reservation--------------------");
+        System.out.println(system);
+        system.createSnapshot();
+        system.addReservation(new Reservation("Emma1", new Date(), 8));
+        system.addReservation(new Reservation("Emma2", new Date(), 12));
+        system.addReservation(new Reservation("Emma3", new Date(), 1));
+        System.out.println("--------------------Added three reservations--------------------");
+//        system.createSnapshot();
+        System.out.println(system);
+        history.undo();
+        System.out.println(system);
+        system.createSnapshot();
+        system.addReservation(new Reservation("Emma1", new Date(), 18));
+        system.addReservation(new Reservation("Emma2", new Date(), 22));
+        system.addReservation(new Reservation("Emma3", new Date(), 11));
+        System.out.println("--------------------Added three reservations--------------------");
+        System.out.println(system);
+        history.undo();
+        System.out.println(system);
+    }
+
     public static void mediator_pattern(){
         // reduce chaotic dependencies between objects. The pattern restricts direct communications between
         // the objects and forces them to collaborate only via a mediator object.
