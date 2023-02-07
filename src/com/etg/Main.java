@@ -66,28 +66,28 @@ public class Main {
         // save and restore the previous state of an object without revealing the details of its implementation.
         // Originator creates the snapshots, memento acts as snap shot, caretaker only knows when and why snapshot was created
         // Often used with Command pattern to implement the Undo action
-        History history = new History();
-        UndoCommand commands = new UndoCommand(history);
-        ReservationSystem system = new ReservationSystem(history);
+        History history = new History(); // RECEIVER
+        UndoCommand commands = new UndoCommand(history); //CONCRETE COMMAND
+        ReservationSystem system = new ReservationSystem(history, commands); //INVOKER
         system.addReservation(new Reservation("Emma", new Date(), 4));
         System.out.println("--------------------Added one reservation--------------------");
         System.out.println(system);
-        system.createSnapshot();
+        system.save();
         system.addReservation(new Reservation("Emma1", new Date(), 8));
         system.addReservation(new Reservation("Emma2", new Date(), 12));
         system.addReservation(new Reservation("Emma3", new Date(), 1));
         System.out.println("--------------------Added three reservations--------------------");
 //        system.createSnapshot();
         System.out.println(system);
-        history.undo();
+        system.undo();
         System.out.println(system);
-        system.createSnapshot();
+//        system.save();
         system.addReservation(new Reservation("Emma1", new Date(), 18));
         system.addReservation(new Reservation("Emma2", new Date(), 22));
         system.addReservation(new Reservation("Emma3", new Date(), 11));
         System.out.println("--------------------Added three reservations--------------------");
         System.out.println(system);
-        history.undo();
+        system.undo();
         System.out.println(system);
     }
 

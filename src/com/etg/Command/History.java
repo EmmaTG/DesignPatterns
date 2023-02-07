@@ -22,6 +22,9 @@ public class History {
         System.out.println("*****UNDO: undoing last added reservations");
         if (this.backAvailable())
             this.backup.pop().restore();
+        else{
+            System.out.println("No back ups available");
+        }
     }
 
     private boolean backAvailable(){

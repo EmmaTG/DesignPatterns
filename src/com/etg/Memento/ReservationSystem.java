@@ -9,9 +9,11 @@ public class ReservationSystem {
     // Originator
     private ArrayList<Reservation> reservations;
     private History history;
+    private UndoCommand command;
 
-    public ReservationSystem(History history) {
+    public ReservationSystem(History history, UndoCommand undo) {
         this.history = history;
+        this.command = undo;
         this.reservations = new ArrayList<>();
     }
 
@@ -19,16 +21,16 @@ public class ReservationSystem {
         this.reservations.add(reservation);
     }
 
-    public void createSnapshot(){
+    public void save(){
         this.history.createBackup(new Snapshot(this,this.reservations));
-    }
-
-    public ArrayList<Reservation> getReservations() {
-        return reservations;
     }
 
     public void setReservations(ArrayList<Reservation> reservations) {
         this.reservations = reservations;
+    }
+
+    public void undo(){
+        this.command.execute();
     }
 
     @Override
