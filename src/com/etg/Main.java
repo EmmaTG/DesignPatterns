@@ -21,6 +21,8 @@ import com.etg.Mediator.TextBox;
 import com.etg.Memento.Reservation;
 import com.etg.Memento.ReservationSystem;
 import com.etg.Memento.UndoCommand;
+import com.etg.Observer.Pizzeria;
+import com.etg.Observer.Subscriber;
 import com.etg.Prototype.Button;
 import com.etg.Prototype.HTMLElement;
 import com.etg.Prototype.Table;
@@ -44,7 +46,8 @@ public class Main {
 //        command_pattern();
 //        iterator_pattern();
 //        mediator_pattern();
-        memento_pattern();
+//        memento_pattern();
+        observer_pattern();
 
         // STRUCTURAL PATTERNS //
 //        adapter_pattern();
@@ -60,6 +63,19 @@ public class Main {
 //        builder_pattern();
 //        prototype_pattern();
 //        singleton_pattern();
+    }
+
+    public static void observer_pattern(){
+        // Subscription mechanism
+        // PUBLISHER: object with interesting state that it will notify SUBSCRIBERS about
+        // SUBSCRIBERS: objects that want to track state of PUBLISHER
+
+        Pizzeria restaurant = new Pizzeria();
+        restaurant.subscribe(new Subscriber(true,false,true,"Emma"));
+        restaurant.subscribe(new Subscriber("Daniel"));
+        restaurant.subscribe(new Subscriber(true,true,true,"Dad"));
+        restaurant.subscribe(new Subscriber(false, false, false,"Mom"));
+        restaurant.newPizzaCreated("Spezial");
     }
 
     public static void memento_pattern(){
