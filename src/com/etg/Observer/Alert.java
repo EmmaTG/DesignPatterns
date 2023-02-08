@@ -1,9 +1,11 @@
 package com.etg.Observer;
 
 abstract class Alert implements IAlert{
-    Subscriber subscriber;
+    ISubscriber subscriber;
+    IAlert notifier;
 
-    public Alert(Subscriber subscriber) {
+    public Alert(ISubscriber subscriber) {
         this.subscriber = subscriber;
+        this.notifier = subscriber.getNotifier();
     }
 }

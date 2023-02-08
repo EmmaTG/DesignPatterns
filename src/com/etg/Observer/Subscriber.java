@@ -8,14 +8,13 @@ public class Subscriber implements ISubscriber{
     boolean text;
     boolean email;
     String name;
-    ArrayList<Alert> alerts;
+    IAlert notifier;
 
     public Subscriber(boolean phone, boolean text, boolean email, String name) {
         this.phone = phone;
         this.text = text;
         this.email = email;
         this.name = name;
-        this.alerts = new ArrayList<>();
         this.setAlerts();
     }
 
@@ -23,29 +22,32 @@ public class Subscriber implements ISubscriber{
         this(false, false, true, name);
     }
 
+    // Decorator pattern: same interface for wrapper and wrappee
     private void setAlerts(){
+        this.notifier = new Notifier();
         if (this.email) {
-            this.alerts.add(new EmailAlert(this));
+            this.notifier = new EmailAlert(this);
         }
         if (this.phone){
-            this.alerts.add(new PhoneAlert(this));
+            this.notifier = new PhoneAlert(this);
         }
         if (this.text){
-            this.alerts.add(new TextAlert(this));
+            this.notifier = new TextAlert(this);
         }
     }
 
     @Override
     public void updateSubscriber(String pizzaname) {
-        if (this.alerts.isEmpty()){
-            System.out.println("No alerts set up for " + this.name.toUpperCase());
-        }
-        for (Alert a : this.alerts){
-            a.sendAlert(pizzaname);
-        }
+        this.notifier.sendAlert(pizzaname);
     }
 
+    @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public IAlert getNotifier() {
+        return notifier;
     }
 }

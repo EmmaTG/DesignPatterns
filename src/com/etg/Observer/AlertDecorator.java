@@ -2,14 +2,14 @@ package com.etg.Observer;
 
 public class AlertDecorator implements IAlert{
 
-    protected Alert alertWrappee;
+    protected Notifier notifier;
 
-    public AlertDecorator(Alert alert) {
-        this.alertWrappee = alert;
+    public AlertDecorator(Notifier notifier) {
+        this.notifier = notifier;
     }
 
     @Override
     public void sendAlert(String pizzaname) {
-        this.alertWrappee.sendAlert(pizzaname);
+        this.notifier.sendAlert(pizzaname);
     }
 }
