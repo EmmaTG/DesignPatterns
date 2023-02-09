@@ -31,6 +31,7 @@ import com.etg.Proxy.RecipeCache;
 import com.etg.Proxy.RecipeManager;
 import com.etg.Proxy.RecipeStore;
 import com.etg.Singleton.Singleton;
+import com.etg.State.Oven;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,7 +48,8 @@ public class Main {
 //        iterator_pattern();
 //        mediator_pattern();
 //        memento_pattern();
-        observer_pattern();
+//        observer_pattern();
+        state_pattern();
 
         // STRUCTURAL PATTERNS //
 //        adapter_pattern();
@@ -63,6 +65,35 @@ public class Main {
 //        builder_pattern();
 //        prototype_pattern();
 //        singleton_pattern();
+    }
+
+    public static void state_pattern(){
+        //  lets an object alter its behavior when its internal state changes. It appears as if the object changed its class.
+        // Avoid situation of many many if statements
+        Oven oven = new Oven();
+        oven.turnOffOven();
+        oven.openOvenDoor();
+        oven.turnOnOven();
+
+        oven.turnOffOven();
+        oven.turnOnOven();
+        oven.openOvenDoor();
+        oven.ovenPreheated();
+        oven.openOvenDoor();
+        oven.turnOnOven();
+        oven.putPizzaInOven();
+        oven.turnOffOven();
+        oven.turnOnOven();
+        oven.putPizzaInOven();
+        oven.pizzaCooked();
+        oven.turnOnOven();
+        oven.turnOffOven();
+        oven.openOvenDoor();
+        oven.removePizza();
+        oven.turnOffOven();
+        oven.openOvenDoor();
+        oven.turnOnOven();
+
     }
 
     public static void observer_pattern(){

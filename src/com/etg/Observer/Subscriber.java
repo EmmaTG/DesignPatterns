@@ -1,8 +1,5 @@
 package com.etg.Observer;
 
-import java.util.ArrayList;
-import java.util.Stack;
-
 public class Subscriber implements ISubscriber{
     boolean phone;
     boolean text;
@@ -24,7 +21,7 @@ public class Subscriber implements ISubscriber{
 
     // Decorator pattern: same interface for wrapper and wrappee
     private void setAlerts(){
-        this.notifier = new Notifier();
+        this.notifier = new NotifierDecorator();
         if (this.email) {
             this.notifier = new EmailAlert(this);
         }
