@@ -3,6 +3,9 @@ package com.etg.State;
 // Context: delegates state-specific work
 public class Oven {
     State state;
+    boolean ovenON;
+    boolean ovenOFF;
+    boolean ovenDoorOpen;
 
     public Oven() {
         this.state = new OffState(this);
