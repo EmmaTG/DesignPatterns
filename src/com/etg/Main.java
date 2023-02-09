@@ -32,6 +32,9 @@ import com.etg.Proxy.RecipeManager;
 import com.etg.Proxy.RecipeStore;
 import com.etg.Singleton.Singleton;
 import com.etg.State.Oven;
+import com.etg.Strategy.CorrectMethod;
+import com.etg.Strategy.IncorrectMethod;
+import com.etg.Strategy.KitchenContext;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,7 +52,8 @@ public class Main {
 //        mediator_pattern();
 //        memento_pattern();
 //        observer_pattern();
-        state_pattern();
+//        state_pattern();
+        strategy_pattern();
 
         // STRUCTURAL PATTERNS //
 //        adapter_pattern();
@@ -65,6 +69,22 @@ public class Main {
 //        builder_pattern();
 //        prototype_pattern();
 //        singleton_pattern();
+    }
+
+    public static void strategy_pattern(){
+        // define family of algorithms (do something specific in a lot of ways) and put each in separate class call STRATEGIES
+        // Context class stores reference to one strategy and executes it. Context doesn't know/care what type of strategy it is
+        // Type of strategy is passed in via client
+        KitchenContext kitchen = new KitchenContext();
+        kitchen.setMethod(new CorrectMethod());
+        System.out.println("How to build a pizza correctly");
+        System.out.println("------------------------------");
+        kitchen.buildPizza();
+        System.out.println();
+        System.out.println("How to do it all wrong!!");
+        System.out.println("------------------------");
+        kitchen.setMethod(new IncorrectMethod());
+        kitchen.buildPizza();
     }
 
     public static void state_pattern(){
