@@ -35,11 +35,12 @@ import com.etg.State.Oven;
 import com.etg.Strategy.CorrectMethod;
 import com.etg.Strategy.IncorrectMethod;
 import com.etg.Strategy.KitchenContext;
+import com.etg.Template.CalzoneMenuItem;
+import com.etg.Template.PizzaMenuItem;
+import com.etg.Template.ProduceMenuItem;
+import com.etg.Template.SaladMenuItem;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
 
@@ -53,7 +54,8 @@ public class Main {
 //        memento_pattern();
 //        observer_pattern();
 //        state_pattern();
-        strategy_pattern();
+//        strategy_pattern();
+        template_pattern();
 
         // STRUCTURAL PATTERNS //
 //        adapter_pattern();
@@ -69,6 +71,49 @@ public class Main {
 //        builder_pattern();
 //        prototype_pattern();
 //        singleton_pattern();
+    }
+
+    public static void template_pattern(){
+        //Define skeleton of algoirthm in superclass, with ability for sub classes to override them
+        // Break down algorithm into steps->turn in to methods and put series calls to these methods inside template method
+        ArrayList<ProduceMenuItem> orderedItems = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        boolean orderMore = true;
+        while (orderMore) {
+            ProduceMenuItem item = null;
+            System.out.println("What would you like to order:");
+            while (true) {
+                System.out.println("1. Pizza");
+                System.out.println("2. Calzone");
+                System.out.println("3. Salad");
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+                switch (choice) {
+                    case 1:
+                        item = new PizzaMenuItem();
+                        break;
+                    case 2:
+                        item = new CalzoneMenuItem();
+                        break;
+                    case 3:
+                        item = new SaladMenuItem();
+                        break;
+                    default:
+                        System.out.println("Sorry that is not an available option, please pick again.");
+                }
+                if (item != null){
+                    break;
+                }
+            }
+            orderedItems.add(item);
+
+            System.out.println("Would you like to order something else: y|n");
+            String answer = scanner.nextLine();
+            orderMore = answer.toLowerCase().equals("y");
+        }
+        for (ProduceMenuItem item : orderedItems){
+            item.create_item();
+        }
     }
 
     public static void strategy_pattern(){
