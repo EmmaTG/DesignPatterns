@@ -48,31 +48,31 @@ public class Main {
     public static void main(String[] args) {
 
         // BEHAVIORAL PATTERNS //
-//        chain_of_responsibility_pattern();
-//        command_pattern();
-//        iterator_pattern();
-//        mediator_pattern();
-//        memento_pattern();
-//        observer_pattern();
-//        state_pattern();
-//        strategy_pattern();
-//        template_pattern();
-        visitor_pattern();
+//        chain_of_responsibility_pattern(); // Pass along requestion for sequential or canonical handling
+//        command_pattern(); // Turns request into an object allows for request passign on, delaying or timed execution
+//        iterator_pattern(); // Traverse collection without exposing representation
+//        mediator_pattern(); // Reduce object dependencies. Communicate vua mediator, not eachother
+//        memento_pattern(); // Save and restore previous states
+//        observer_pattern(); // subscription mechanism
+//        state_pattern(); // alter behaviour with internal state change
+//        strategy_pattern(); // put family of algorithms into separate classes
+//        template_pattern(); // Defines algorithm skeleton, subclass overwrite allowed
+//        visitor_pattern(); // separate alogrithm from objects on which they operate
 
         // STRUCTURAL PATTERNS //
-//        adapter_pattern();
-//        bridge_pattern();
-//        composite_pattern();
-//        decorator_pattern();
-//        facade_pattern();
-//        fly_weight_pattern();
-//        proxy_pattern();
+//        adapter_pattern(); // Allows objects with incompatible interfaces to collaborate
+//        bridge_pattern(); // SPlit large classes into abstraction and implementation
+//        composite_pattern(); // Create tree sturctures
+//        decorator_pattern(); // Attach new behaviours to objects inside special wrapper objects
+//        facade_pattern(); //simplified interface for complex classes,framework or library
+//        fly_weight_pattern(); // Ram space optimization
+//        proxy_pattern(); // Provide placeholder for another object
 
         // CREATIONAL DESIGN PATTERNS //
-//        factory_pattern();
-//        builder_pattern();
-//        prototype_pattern();
-//        singleton_pattern();
+//        factory_pattern(); // Create objects in superclass via factory method
+//        builder_pattern(); // Create complex objects step by step. No monsterous constructors
+//        prototype_pattern(); // Create copy of object without code being dependent on their classes
+//        singleton_pattern(); // Only want one instance of a class (e.g. a database)
     }
     public static void visitor_pattern(){
         // separate algorithms from the objects on which they operate.
