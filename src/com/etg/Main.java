@@ -39,6 +39,7 @@ import com.etg.Template.CalzoneMenuItem;
 import com.etg.Template.PizzaMenuItem;
 import com.etg.Template.ProduceMenuItem;
 import com.etg.Template.SaladMenuItem;
+import com.etg.Visitor.*;
 
 import java.util.*;
 
@@ -55,7 +56,8 @@ public class Main {
 //        observer_pattern();
 //        state_pattern();
 //        strategy_pattern();
-        template_pattern();
+//        template_pattern();
+        visitor_pattern();
 
         // STRUCTURAL PATTERNS //
 //        adapter_pattern();
@@ -71,6 +73,34 @@ public class Main {
 //        builder_pattern();
 //        prototype_pattern();
 //        singleton_pattern();
+    }
+    public static void visitor_pattern(){
+        // separate algorithms from the objects on which they operate.
+        // Create algorithm as a class (VISITOR) and pass object onto which you want to perform the algorithm into the Visitor
+        // Use double dispatch to find out what type of object it is, delegate this to the object itself via accept method
+        CostCalculator costCalculator = new CostCalculator();
+        ArrayList<Element> customersOrder = new ArrayList<>();
+        ChildPizza pizza1 = new ChildPizza();
+        ChildPizza pizza2 = new ChildPizza();
+        pizza2.addExtraCheese();
+        AdultPizza pizza3 = new AdultPizza(30,"Salami");
+        pizza3.addTopping("Artichokes");
+        pizza3.addTopping("Olives");
+        AdultPizza pizza4 = new AdultPizza(30, "Tomatoes");
+        PensionerPizza pizza5 = new PensionerPizza(20);
+        customersOrder.add(pizza1);
+        customersOrder.add(pizza2);
+        customersOrder.add(pizza3);
+        customersOrder.add(pizza4);
+        customersOrder.add(pizza5);
+        double orderAmount = 0;
+        double pizzaCost;
+        for (Element e : customersOrder){
+            pizzaCost = e.accept(costCalculator);
+            System.out.println("Pizza " + e + "\n\tcosts " + pizzaCost);
+            orderAmount += pizzaCost;
+        }
+        System.out.println("Total order costs: " + orderAmount);
     }
 
     public static void template_pattern(){
